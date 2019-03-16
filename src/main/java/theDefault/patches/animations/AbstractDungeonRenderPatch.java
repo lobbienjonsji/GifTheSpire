@@ -1,25 +1,42 @@
 package theDefault.patches.animations;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
-import com.evacipated.cardcrawl.modthespire.lib.SpirePrefixPatch;
-import com.megacrit.cardcrawl.cards.AbstractCard;
-import com.megacrit.cardcrawl.helpers.DrawMaster;
-import theDefault.cards.AbstractAnimatedCard;
-import theDefault.util.Animator;
+import com.evacipated.cardcrawl.modthespire.lib.*;
+import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
+import javassist.CannotCompileException;
+import javassist.CtBehavior;
+import theDefault.LobLib;
+import theDefault.util.GifAnimation;
+import com.megacrit.cardcrawl.rooms.*;
 
-/*
- * Patches have a pretty detailed documentation. Go check em out here:
- *
- *  https://github.com/kiooeht/ModTheSpire/wiki/SpirePatch
- */
+import java.util.ArrayList;
 
-@SpirePatch(clz = DrawMaster.class, method = "draw")
-public class DrawMasterPatch {
-    @SpirePrefixPatch
-    public static void patch(DrawMaster __instance, SpriteBatch sb)
-    {
-        Animator.spriteBatch = sb;
+
+@SpirePatch(clz = AbstractDungeon.class, method = "render")
+public class AbstractDungeonRenderPatch {
+    @SpireInsertPatch(locator = Locator.class)
+    public static void patch(AbstractDungeon __instance, SpriteBatch sb) {
+        ArrayList<GifAnimation> Renderthis = LobLib.getAnimations().get("Background");
+        if (Renderthis != null) {
+            for (GifAnimation g : Renderthis) {
+                if (AbstractDungeon.getCurrRoom() instanceof MonsterRoom) {
+                    g.ishidden = false;
+                } else {
+                    g.ishidden = true;
+                }
+                if (g.ishidden == false) {
+                    g.renderAsBackground(sb);
+                }
+            }
+        }
+    }
+    private static class Locator extends SpireInsertLocator {
+         public int[] Locate(CtBehavior ctMethodToPatch) throws CannotCompileException, PatchingException {
+            Matcher finalMatcher = new Matcher.FieldAccessMatcher(
+                    AbstractDungeon.class, "dynamicButton");
+            return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<Matcher>(), finalMatcher);
+        }
     }
 
 }

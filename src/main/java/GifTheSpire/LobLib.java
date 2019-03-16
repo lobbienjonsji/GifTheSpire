@@ -6,6 +6,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.evacipated.cardcrawl.modthespire.lib.SpireInitializer;
 import com.google.gson.Gson;
+import com.megacrit.cardcrawl.events.AbstractEvent;
+import com.megacrit.cardcrawl.events.exordium.Sssserpent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import GifTheSpire.util.GifAnimation;
@@ -22,8 +24,9 @@ public class LobLib implements
     public static final Logger logger = LogManager.getLogger(LobLib.class.getName());
     private static String modID;
     public static HashMap<String, ArrayList<GifAnimation>> Animations = new HashMap<>();
-    public static GifAnimation FreeRealEstate = new GifAnimation("theDefaultResources/images/other/freerealestatepritesheet.png", 5, 17, 0, 0, 1.0F, 1.0F, false );
+    public static GifAnimation FreeRealEstate = new GifAnimation("GifTheSpireResources/images/other/freerealestatepritesheet.png", 5, 17, 0, 0, 1.0F, 1.0F, false );
     public static ArrayList<GifAnimation> TickThis = new ArrayList<>();
+    public static AbstractEvent CurrentEvent = null;
     public LobLib() {
         BaseMod.subscribe(this);
         setModID("Loblib");
@@ -66,7 +69,6 @@ public class LobLib implements
     }// NO
     // ====== YOU CAN EDIT AGAIN ======
 
-
     @SuppressWarnings("unused")
     public static void initialize() {
         logger.info("Initializing GifMod ö/");
@@ -79,6 +81,7 @@ public class LobLib implements
         FreeRealEstate.create();
         FreeRealEstate.addAsBackgroundAnimation();
         FreeRealEstate.addAsCardAnimation("Strike_R");
+        FreeRealEstate.addAsEventAnimation(Sssserpent.class.getName());
     }
 
     public static HashMap<String, ArrayList<GifAnimation>> getAnimations()

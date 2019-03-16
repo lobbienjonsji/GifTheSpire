@@ -75,11 +75,16 @@ public class GifAnimation implements ApplicationListener {
         sb.setColor(Color.WHITE);
         sb.draw(currentFrame, posx, posy,originx, originy, sizex, sizey, scalex, scaley, angle);
     }
+    public void renderAsEvent(SpriteBatch sb) {
+        TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, true);
+        sb.setColor(Color.WHITE);
+        sb.draw(currentFrame, (460.0F*Settings.scale + (600.0F-(currentFrame.getTexture().getWidth()/clms)*widthmodfier)/2.0F) - 300.0F,  (Settings.EVENT_Y - 300.0F + 16.0F * Settings.scale)+(600.0F -(currentFrame.getTexture().getHeight()/rows*heightmodifier))/2.0F, (currentFrame.getTexture().getWidth()/clms)*widthmodfier, (currentFrame.getTexture().getHeight()/rows)*heightmodifier);
+    }
 
     public void renderanimationonce(SpriteBatch sb) {
         TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, false);
         sb.setColor(Color.WHITE);
-        sb.draw(currentFrame, currentx, currenty, (currentFrame.getTexture().getWidth()/clms)*widthmodfier, (currentFrame.getTexture().getHeight()/rows)*heightmodifier);
+        sb.draw(currentFrame, 460.0F, currenty, (currentFrame.getTexture().getWidth()/clms)*widthmodfier, (currentFrame.getTexture().getHeight()/rows)*heightmodifier);
     }
 
     public void addAsBackgroundAnimation()
@@ -104,6 +109,18 @@ public class GifAnimation implements ApplicationListener {
         {
             LobLib.Animations.put(Card, new ArrayList<>());
             LobLib.Animations.get(Card).add(this);
+        }
+    }
+    public void addAsEventAnimation(String Event)
+    {
+        if(LobLib.Animations.containsKey(Event))
+        {
+            LobLib.Animations.get(Event).add(this);
+        }
+        else
+        {
+            LobLib.Animations.put(Event, new ArrayList<>());
+            LobLib.Animations.get(Event).add(this);
         }
     }
     @Override

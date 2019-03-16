@@ -81,6 +81,11 @@ public class GifAnimation implements ApplicationListener {
         sb.draw(currentFrame, (460.0F*Settings.scale + (600.0F-(currentFrame.getTexture().getWidth()/clms)*widthmodfier*Settings.scale)/2.0F) - 300.0F,  (Settings.EVENT_Y - 300.0F + 16.0F * Settings.scale)+(600.0F -(currentFrame.getTexture().getHeight()/rows*heightmodifier*Settings.scale))/2.0F, (currentFrame.getTexture().getWidth()/clms)*widthmodfier*Settings.scale, (currentFrame.getTexture().getHeight()/rows)*heightmodifier*Settings.scale);
     }
 
+    public void renderasCustomElement()
+    {
+
+    }
+
     public void renderanimationonce(SpriteBatch sb) {
         TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, false);
         sb.setColor(Color.WHITE);
@@ -123,6 +128,19 @@ public class GifAnimation implements ApplicationListener {
             LobLib.Animations.get(Event).add(this);
         }
     }
+    public void addAsForeGroundAnimation()
+    {
+        if(LobLib.Animations.containsKey("Foreground"))
+        {
+            LobLib.Animations.get("Foreground").add(this);
+        }
+        else
+        {
+            LobLib.Animations.put("Foreground", new ArrayList<>());
+            LobLib.Animations.get("Foreground").add(this);
+        }
+    }
+
     @Override
     public void resize(int i, int i1) {
 

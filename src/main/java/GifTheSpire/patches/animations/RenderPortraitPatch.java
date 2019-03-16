@@ -19,7 +19,9 @@ public class RenderPortraitPatch {
             float drawX = __instance.current_x - 125.0F;
             float drawY = __instance.current_y - 95.0F;
             for (GifAnimation g : Renderthis) {
-                g.renderAsPortrait(sb, __instance.angle, 250, 190, drawX*1.0F, drawY + 72.0F,125.0F, 23.0F,__instance.drawScale*Settings.scale, __instance.drawScale*Settings.scale);
+                if (g.ishidden == false) {
+                    g.renderAsPortrait(sb, __instance.angle, 250, 190, drawX * 1.0F, drawY + 72.0F, 125.0F, 23.0F, __instance.drawScale * Settings.scale, __instance.drawScale * Settings.scale);
+                }
             }
         }
     }

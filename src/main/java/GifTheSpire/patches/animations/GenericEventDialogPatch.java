@@ -20,7 +20,9 @@ public class GenericEventDialogPatch {
         ArrayList<GifAnimation> Renderthis = LobLib.getAnimations().get(LobLib.CurrentEvent.getClass().getName());
         if (Renderthis != null) {
             for (GifAnimation g:Renderthis) {
-                g.renderAsEvent(sb);
+                if (g.ishidden == false) {
+                    g.renderAsEvent(sb);
+                }
             }
         }
     }

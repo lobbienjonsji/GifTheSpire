@@ -1,4 +1,4 @@
-package theDefault.util;
+package GifTheSpire.util;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
-import theDefault.LobLib;
+import GifTheSpire.LobLib;
 
 import java.util.ArrayList;
 

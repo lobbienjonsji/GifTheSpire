@@ -1,4 +1,4 @@
-package theDefault.patches.animations;
+package GifTheSpire.patches.animations;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.evacipated.cardcrawl.modthespire.lib.*;
@@ -6,8 +6,8 @@ import com.evacipated.cardcrawl.modthespire.patcher.PatchingException;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import javassist.CannotCompileException;
 import javassist.CtBehavior;
-import theDefault.LobLib;
-import theDefault.util.GifAnimation;
+import GifTheSpire.LobLib;
+import GifTheSpire.util.GifAnimation;
 import com.megacrit.cardcrawl.rooms.*;
 
 import java.util.ArrayList;

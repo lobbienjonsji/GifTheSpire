@@ -1,4 +1,4 @@
-package theDefault.util;
+package GifTheSpire.util;
 
 import java.util.ArrayList;
 

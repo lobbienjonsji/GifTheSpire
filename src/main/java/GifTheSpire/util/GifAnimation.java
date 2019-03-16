@@ -78,7 +78,7 @@ public class GifAnimation implements ApplicationListener {
     public void renderAsEvent(SpriteBatch sb) {
         TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, true);
         sb.setColor(Color.WHITE);
-        sb.draw(currentFrame, (460.0F*Settings.scale + (600.0F-(currentFrame.getTexture().getWidth()/clms)*widthmodfier)/2.0F) - 300.0F,  (Settings.EVENT_Y - 300.0F + 16.0F * Settings.scale)+(600.0F -(currentFrame.getTexture().getHeight()/rows*heightmodifier))/2.0F, (currentFrame.getTexture().getWidth()/clms)*widthmodfier, (currentFrame.getTexture().getHeight()/rows)*heightmodifier);
+        sb.draw(currentFrame, (460.0F*Settings.scale + (600.0F-(currentFrame.getTexture().getWidth()/clms)*widthmodfier*Settings.scale)/2.0F) - 300.0F,  (Settings.EVENT_Y - 300.0F + 16.0F * Settings.scale)+(600.0F -(currentFrame.getTexture().getHeight()/rows*heightmodifier*Settings.scale))/2.0F, (currentFrame.getTexture().getWidth()/clms)*widthmodfier*Settings.scale, (currentFrame.getTexture().getHeight()/rows)*heightmodifier*Settings.scale);
     }
 
     public void renderanimationonce(SpriteBatch sb) {

@@ -24,7 +24,7 @@ public class LobLib implements
     public static final Logger logger = LogManager.getLogger(LobLib.class.getName());
     private static String modID;
     public static HashMap<String, ArrayList<GifAnimation>> Animations = new HashMap<>();
-    public static GifAnimation FreeRealEstate = new GifAnimation("GifTheSpireResources/images/other/freerealestatepritesheet.png", 5, 17, 0, 0, 1.0F, 1.0F, false );
+    public static GifAnimation FreeRealEstate = new GifAnimation("GifTheSpireResources/images/other/freerealestatepritesheet.png", 5, 17, 0, 0, 2.0F, 2.0F, false );
     public static ArrayList<GifAnimation> TickThis = new ArrayList<>();
     public static AbstractEvent CurrentEvent = null;
     public LobLib() {

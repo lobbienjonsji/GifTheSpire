@@ -1,5 +1,6 @@
 package GifTheSpire.util;
 
+import GifTheSpire.GifTheSpireLib;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -7,9 +8,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
-import GifTheSpire.LobLib;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
@@ -25,6 +28,7 @@ public class GifAnimation implements ApplicationListener {
     private int rows;
     private String txt;
     public boolean ishidden;
+    public static final Logger logger = LogManager.getLogger(GifTheSpireLib.class.getName());
     public GifAnimation(String imgurl, int columns, int rows, float x, float y, float stretchx, float stretchy, boolean ishiddeninitially)
     {
         currentx = x;
@@ -53,7 +57,7 @@ public class GifAnimation implements ApplicationListener {
         }
         GifAnimation = new Animation<TextureRegion>(0.025f, Frames);
         stateTime = 0f;
-        LobLib.TickThis.add(this);
+        GifTheSpireLib.TickThis.add(this);
     }
     public void tick()
     {
@@ -63,7 +67,7 @@ public class GifAnimation implements ApplicationListener {
     public void renderanimation(SpriteBatch sb) {
         TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, true);
         sb.setColor(Color.WHITE);
-        sb.draw(currentFrame, currentx, currenty, /*(currentFrame.getTexture().getWidth()/clms)*widthmodfier, (currentFrame.getTexture().getHeight()/rows)*heightmodifier*/ Settings.WIDTH, Settings.HEIGHT);
+        sb.draw(currentFrame, currentx, currenty, (currentFrame.getTexture().getWidth()/clms)*widthmodfier, (currentFrame.getTexture().getHeight()/rows)*heightmodifier /*Settings.WIDTH, Settings.HEIGHT*/);
     }
     public void renderAsBackground(SpriteBatch sb) {
         TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, true);
@@ -80,12 +84,19 @@ public class GifAnimation implements ApplicationListener {
         sb.setColor(Color.WHITE);
         sb.draw(currentFrame, (460.0F*Settings.scale + (600.0F-(currentFrame.getTexture().getWidth()/clms)*widthmodfier*Settings.scale)/2.0F) - 300.0F,  (Settings.EVENT_Y - 300.0F + 16.0F * Settings.scale)+(600.0F -(currentFrame.getTexture().getHeight()/rows*heightmodifier*Settings.scale))/2.0F, (currentFrame.getTexture().getWidth()/clms)*widthmodfier*Settings.scale, (currentFrame.getTexture().getHeight()/rows)*heightmodifier*Settings.scale);
     }
-
-    public void renderasCustomElement()
-    {
-
+    public void renderOverCharacter(SpriteBatch sb, AbstractPlayer a) {
+        TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, false);
+        sb.setColor(Color.WHITE);
+        if (a.img != null) {
+            sb.draw(currentFrame, a.drawX + a.animX, a.drawY + a.animY, a.img.getWidth(), a.img.getHeight());
+            logger.info("beep!");
+        }
+        else
+        {
+            sb.draw(currentFrame, a.drawX + a.animX, a.drawY + a.animY,(currentFrame.getTexture().getWidth()/clms)*widthmodfier, (currentFrame.getTexture().getHeight()/rows)*heightmodifier );
+            logger.info("boop!");
+        }
     }
-
     public void renderanimationonce(SpriteBatch sb) {
         TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, false);
         sb.setColor(Color.WHITE);
@@ -94,50 +105,62 @@ public class GifAnimation implements ApplicationListener {
 
     public void addAsBackgroundAnimation()
     {
-        if(LobLib.Animations.containsKey("Background"))
+        if(GifTheSpireLib.Animations.containsKey("Background"))
         {
-            LobLib.Animations.get("Background").add(this);
+            GifTheSpireLib.Animations.get("Background").add(this);
         }
         else
         {
-            LobLib.Animations.put("Background", new ArrayList<>());
-            LobLib.Animations.get("Background").add(this);
+            GifTheSpireLib.Animations.put("Background", new ArrayList<>());
+            GifTheSpireLib.Animations.get("Background").add(this);
         }
     }
     public void addAsCardAnimation(String Card)
     {
-        if(LobLib.Animations.containsKey(Card))
+        if(GifTheSpireLib.Animations.containsKey(Card))
         {
-            LobLib.Animations.get(Card).add(this);
+            GifTheSpireLib.Animations.get(Card).add(this);
         }
         else
         {
-            LobLib.Animations.put(Card, new ArrayList<>());
-            LobLib.Animations.get(Card).add(this);
+            GifTheSpireLib.Animations.put(Card, new ArrayList<>());
+            GifTheSpireLib.Animations.get(Card).add(this);
         }
     }
     public void addAsEventAnimation(String Event)
     {
-        if(LobLib.Animations.containsKey(Event))
+        if(GifTheSpireLib.Animations.containsKey(Event))
         {
-            LobLib.Animations.get(Event).add(this);
+            GifTheSpireLib.Animations.get(Event).add(this);
         }
         else
         {
-            LobLib.Animations.put(Event, new ArrayList<>());
-            LobLib.Animations.get(Event).add(this);
+            GifTheSpireLib.Animations.put(Event, new ArrayList<>());
+            GifTheSpireLib.Animations.get(Event).add(this);
         }
     }
     public void addAsForeGroundAnimation()
     {
-        if(LobLib.Animations.containsKey("Foreground"))
+        if(GifTheSpireLib.Animations.containsKey("Foreground"))
         {
-            LobLib.Animations.get("Foreground").add(this);
+            GifTheSpireLib.Animations.get("Foreground").add(this);
         }
         else
         {
-            LobLib.Animations.put("Foreground", new ArrayList<>());
-            LobLib.Animations.get("Foreground").add(this);
+            GifTheSpireLib.Animations.put("Foreground", new ArrayList<>());
+            GifTheSpireLib.Animations.get("Foreground").add(this);
+        }
+    }
+    public void addAsCharacterAnimation(String ChosenClass)
+    {
+        if(GifTheSpireLib.Animations.containsKey(ChosenClass))
+        {
+            GifTheSpireLib.Animations.get(ChosenClass).add(this);
+        }
+        else
+        {
+            GifTheSpireLib.Animations.put(ChosenClass, new ArrayList<>());
+            GifTheSpireLib.Animations.get(ChosenClass).add(this);
         }
     }
 

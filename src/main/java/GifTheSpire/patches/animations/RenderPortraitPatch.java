@@ -5,7 +5,7 @@ import com.evacipated.cardcrawl.modthespire.lib.SpirePatch;
 import com.evacipated.cardcrawl.modthespire.lib.SpirePostfixPatch;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.core.Settings;
-import GifTheSpire.LobLib;
+import GifTheSpire.GifTheSpireLib;
 import GifTheSpire.util.GifAnimation;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class RenderPortraitPatch {
     @SpirePostfixPatch
     public static void patch(AbstractCard __instance, SpriteBatch sb) {
-        ArrayList<GifAnimation> Renderthis = LobLib.getAnimations().get(__instance.cardID);
+        ArrayList<GifAnimation> Renderthis = GifTheSpireLib.getAnimations().get(__instance.cardID);
         if (Renderthis != null) {
             float drawX = __instance.current_x - 125.0F;
             float drawY = __instance.current_y - 95.0F;

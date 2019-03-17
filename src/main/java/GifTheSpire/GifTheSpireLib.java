@@ -25,7 +25,7 @@ public class GifTheSpireLib implements
     public static final Logger logger = LogManager.getLogger(GifTheSpireLib.class.getName());
     private static String modID;
     public static HashMap<String, ArrayList<GifAnimation>> Animations = new HashMap<>();
-    public static GifAnimation FreeRealEstate = new GifAnimation("GifTheSpireResources/images/other/freerealestatepritesheet.png", 5, 17, 0, 0, 2.0F, 2.0F, false );
+    //public static GifAnimation FreeRealEstate = new GifAnimation("GifTheSpireResources/images/other/freerealestatepritesheet.png", 5, 17, 0, 0, 2.0F, 2.0F, false );
     public static ArrayList<GifAnimation> TickThis = new ArrayList<>();
     public static AbstractEvent CurrentEvent = null;
     public GifTheSpireLib() {
@@ -79,12 +79,12 @@ public class GifTheSpireLib implements
     @Override
     public void receivePostInitialize() {
         logger.info("Creating Gifs");
-        FreeRealEstate.create();
-        FreeRealEstate.addAsBackgroundAnimation();
-        FreeRealEstate.addAsCardAnimation("Strike_R");
-        FreeRealEstate.addAsEventAnimation(Sssserpent.class.getName());
+        //FreeRealEstate.create();
+        //FreeRealEstate.addAsBackgroundAnimation();
+        //FreeRealEstate.addAsCardAnimation("Strike_R");
+        //FreeRealEstate.addAsEventAnimation(Sssserpent.class.getName());
         //FreeRealEstate.addAsForeGroundAnimation();
-        FreeRealEstate.addAsCharacterAnimation(Defect.class.getName());
+        //FreeRealEstate.addAsCharacterAnimation(Defect.class.getName());
     }
 
     public static HashMap<String, ArrayList<GifAnimation>> getAnimations()

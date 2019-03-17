@@ -69,12 +69,12 @@ public class GifAnimation implements ApplicationListener {
     public void renderanimation(SpriteBatch sb) {
         TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, true);
         sb.setColor(Color.WHITE);
-        sb.draw(currentFrame, currentx, currenty, (currentFrame.getTexture().getWidth()/clms)*widthmodfier, (currentFrame.getTexture().getHeight()/rows)*heightmodifier /*Settings.WIDTH, Settings.HEIGHT*/);
+        sb.draw(currentFrame, currentx*Settings.scale, currenty*Settings.scale, (currentFrame.getTexture().getWidth()/clms)*widthmodfier*Settings.scale, (currentFrame.getTexture().getHeight()/rows)*heightmodifier*Settings.scale /*Settings.WIDTH, Settings.HEIGHT*/);
     }
     public void renderAsBackground(SpriteBatch sb) {
         TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, true);
         sb.setColor(Color.WHITE);
-        sb.draw(currentFrame, currentx, currenty, Settings.WIDTH, Settings.HEIGHT);
+        sb.draw(currentFrame, 0, 0, Settings.WIDTH, Settings.HEIGHT);
     }
     public void renderAsPortrait(SpriteBatch sb, float angle, float sizex, float sizey, float posx, float posy, float originx, float originy, float scalex, float scaley) {
         TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, true);
@@ -91,12 +91,6 @@ public class GifAnimation implements ApplicationListener {
         getSpritebatch.setColor(Color.WHITE);
         getSpritebatch.draw(currentFrame, a.drawX - (currentFrame.getTexture().getWidth()/clms)*widthmodfier*Settings.scale*0.5F + a.animX, a.drawY, (currentFrame.getTexture().getWidth()/clms)*widthmodfier*Settings.scale, (currentFrame.getTexture().getHeight()/rows)*heightmodifier*Settings.scale);
     }
-    public void renderanimationonce(SpriteBatch sb) {
-        TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, false);
-        sb.setColor(Color.WHITE);
-        sb.draw(currentFrame, 460.0F, currenty, (currentFrame.getTexture().getWidth()/clms)*widthmodfier, (currentFrame.getTexture().getHeight()/rows)*heightmodifier);
-    }
-
     public void addAsBackgroundAnimation()
     {
         if(GifTheSpireLib.Animations.containsKey("Background"))

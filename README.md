@@ -1,3 +1,3 @@
 # GifTheSpire
 
-If you read this it means that I don't have had time to explain how this works yet. Please have patience.
+A mod that allows intuitive creation of ingame animations using sprite sheets.

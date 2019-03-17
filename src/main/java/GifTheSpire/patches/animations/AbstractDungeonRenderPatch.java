@@ -17,14 +17,15 @@ import java.util.ArrayList;
 public class AbstractDungeonRenderPatch {
     @SpireInsertPatch(locator = Locator.class)
     public static void patch(AbstractDungeon __instance, SpriteBatch sb) {
+        GifAnimation.getSpritebatch = sb;
         ArrayList<GifAnimation> Renderthis = GifTheSpireLib.getAnimations().get("Background");
         if (Renderthis != null) {
             for (GifAnimation g : Renderthis) {
-                if (AbstractDungeon.getCurrRoom() instanceof MonsterRoom) {
+                /*if (AbstractDungeon.getCurrRoom() instanceof MonsterRoom) {
                     g.ishidden = false;
                 } else {
                     g.ishidden = true;
-                }
+                }*/
                 if (g.ishidden == false) {
                     g.renderAsBackground(sb);
                 }

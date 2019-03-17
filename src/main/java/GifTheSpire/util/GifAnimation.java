@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.Settings;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,6 +29,7 @@ public class GifAnimation implements ApplicationListener {
     private int rows;
     private String txt;
     public boolean ishidden;
+    public static SpriteBatch getSpritebatch = null;
     public static final Logger logger = LogManager.getLogger(GifTheSpireLib.class.getName());
     public GifAnimation(String imgurl, int columns, int rows, float x, float y, float stretchx, float stretchy, boolean ishiddeninitially)
     {
@@ -85,17 +87,9 @@ public class GifAnimation implements ApplicationListener {
         sb.draw(currentFrame, (460.0F*Settings.scale + (600.0F-(currentFrame.getTexture().getWidth()/clms)*widthmodfier*Settings.scale)/2.0F) - 300.0F,  (Settings.EVENT_Y - 300.0F + 16.0F * Settings.scale)+(600.0F -(currentFrame.getTexture().getHeight()/rows*heightmodifier*Settings.scale))/2.0F, (currentFrame.getTexture().getWidth()/clms)*widthmodfier*Settings.scale, (currentFrame.getTexture().getHeight()/rows)*heightmodifier*Settings.scale);
     }
     public void renderOverCharacter(SpriteBatch sb, AbstractPlayer a) {
-        TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, false);
-        sb.setColor(Color.WHITE);
-        if (a.img != null) {
-            sb.draw(currentFrame, a.drawX + a.animX, a.drawY + a.animY, a.img.getWidth(), a.img.getHeight());
-            logger.info("beep!");
-        }
-        else
-        {
-            sb.draw(currentFrame, a.drawX + a.animX, a.drawY + a.animY,(currentFrame.getTexture().getWidth()/clms)*widthmodfier, (currentFrame.getTexture().getHeight()/rows)*heightmodifier );
-            logger.info("boop!");
-        }
+        TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, true);
+        getSpritebatch.setColor(Color.WHITE);
+        getSpritebatch.draw(currentFrame, a.drawX - (currentFrame.getTexture().getWidth()/clms)*widthmodfier*Settings.scale*0.5F + a.animX, a.drawY, (currentFrame.getTexture().getWidth()/clms)*widthmodfier*Settings.scale, (currentFrame.getTexture().getHeight()/rows)*heightmodifier*Settings.scale);
     }
     public void renderanimationonce(SpriteBatch sb) {
         TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, false);

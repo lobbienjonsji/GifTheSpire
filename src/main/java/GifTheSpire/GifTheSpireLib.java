@@ -30,7 +30,7 @@ public class GifTheSpireLib implements
     public static AbstractEvent CurrentEvent = null;
     public GifTheSpireLib() {
         BaseMod.subscribe(this);
-        setModID("Loblib");
+        setModID("GifTheSpireLib");
     }
     public static void setModID(String ID) { // DON'T EDIT
         Gson coolG = new Gson(); // EY DON'T EDIT THIS

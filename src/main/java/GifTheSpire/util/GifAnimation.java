@@ -18,7 +18,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 
 public class GifAnimation implements ApplicationListener {
-    static Animation<TextureRegion> GifAnimation;
+    private Animation<TextureRegion> GifAnimation;
     Texture TextureReg;
     float stateTime;
     public float currentx;
@@ -28,6 +28,7 @@ public class GifAnimation implements ApplicationListener {
     private int clms;
     private int rows;
     private String txt;
+    private float framedur = 0.025F;
     public boolean ishidden;
     public static SpriteBatch getSpritebatch = null;
     public static final Logger logger = LogManager.getLogger(GifTheSpireLib.class.getName());
@@ -65,7 +66,10 @@ public class GifAnimation implements ApplicationListener {
     {
         stateTime += Gdx.graphics.getDeltaTime();
     }
-
+    public void setAnimationspeed(float spf)
+    {
+        GifAnimation.setFrameDuration(spf);
+    }
     public void renderanimation(SpriteBatch sb) {
         TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, true);
         sb.setColor(Color.WHITE);

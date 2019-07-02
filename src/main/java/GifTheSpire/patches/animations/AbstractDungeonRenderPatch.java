@@ -34,8 +34,7 @@ public class AbstractDungeonRenderPatch {
     }
     private static class Locator extends SpireInsertLocator {
          public int[] Locate(CtBehavior ctMethodToPatch) throws CannotCompileException, PatchingException {
-            Matcher finalMatcher = new Matcher.FieldAccessMatcher(
-                    AbstractDungeon.class, "dynamicButton");
+             Matcher finalMatcher = new Matcher.MethodCallMatcher(AbstractRoom.class, "render");
             return LineFinder.findInOrder(ctMethodToPatch, new ArrayList<Matcher>(), finalMatcher);
         }
     }

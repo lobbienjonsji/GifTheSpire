@@ -1,6 +1,7 @@
 package GifTheSpire.util;
 
 import GifTheSpire.GifTheSpireLib;
+import basemod.ReflectionHacks;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -10,9 +11,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.megacrit.cardcrawl.cards.AbstractCard;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.core.AbstractCreature;
 import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.ImageMaster;
+import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import com.megacrit.cardcrawl.screens.SingleCardViewPopup;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -111,6 +115,13 @@ public class GifAnimation implements ApplicationListener {
         getSpritebatch.setColor(Color.WHITE);
         getSpritebatch.draw(currentFrame, a.drawX - (currentFrame.getTexture().getWidth()/clms)*widthmodfier*Settings.scale*0.5F + a.animX, a.drawY, (currentFrame.getTexture().getWidth()/clms)*widthmodfier*Settings.scale, (currentFrame.getTexture().getHeight()/rows)*heightmodifier*Settings.scale);
     }
+    public void renderOverCreature(SpriteBatch sb, AbstractMonster m)
+    {
+        TextureRegion currentFrame = GifAnimation.getKeyFrame(stateTime, loop);
+        sb.setColor(Color.WHITE);
+        sb.draw(currentFrame,m.drawX - ((float) (currentFrame.getTexture().getWidth()/clms)*widthmodfier*Settings.scale*0.5F) + m.animX,(float) m.drawY + m.animY, (float)(currentFrame.getTexture().getWidth()/clms)*widthmodfier* Settings.scale, (float)(currentFrame.getTexture().getHeight()/rows)*heightmodifier*Settings.scale);
+
+    }
     public void setLoop(boolean loop)
     {
         this.loop = loop;
@@ -184,6 +195,18 @@ public class GifAnimation implements ApplicationListener {
         {
             GifTheSpireLib.Animations.put(ChosenClass, new ArrayList<>());
             GifTheSpireLib.Animations.get(ChosenClass).add(this);
+        }
+    }
+    public void addAsMonsterAnimation(String MonsterID)
+    {
+        if(GifTheSpireLib.Animations.containsKey(MonsterID))
+        {
+            GifTheSpireLib.Animations.get(MonsterID).add(this);
+        }
+        else
+        {
+            GifTheSpireLib.Animations.put(MonsterID, new ArrayList<>());
+            GifTheSpireLib.Animations.get(MonsterID).add(this);
         }
     }
 
